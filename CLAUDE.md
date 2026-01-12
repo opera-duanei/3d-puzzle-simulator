@@ -5,6 +5,7 @@
 **This file is a living document.** You should proactively update it:
 
 - **Add** new important context after implementing features
+- **Add** context when discovering user changes (new rules, configs, patterns)
 - **Remove** outdated/unnecessary information during updates
 - **Reflect desired state** of the project, not necessarily current state
 - **Think twice** before changes - ensure alignment with project goals
@@ -68,3 +69,17 @@ You have access to the chrome-devtools MCP server for browser automation and tes
 6. Validate functionality before marking task complete
 
 **CRITICAL**: Always verify changes in browser before completing frontend tasks.
+
+## Code Quality Standards
+
+### File Length Limit
+
+- **Max 500 lines** per file enforced via ESLint `max-lines` rule
+- Encourages modularity and code splitting
+- Violations shown as warnings in `pnpm lint`
+
+### Fixing Lint/Format Issues
+
+- **Always run `pnpm fix` first** when encountering lint/format errors
+- Auto-fixes formatting and auto-fixable lint issues
+- Only manually fix issues that can't be auto-resolved
