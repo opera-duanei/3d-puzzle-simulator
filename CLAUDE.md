@@ -1,3 +1,18 @@
+# Project Context
+
+## CLAUDE.md Management
+
+**This file is a living document.** You should proactively update it:
+
+- **Add** new important context after implementing features
+- **Remove** outdated/unnecessary information during updates
+- **Reflect desired state** of the project, not necessarily current state
+- **Think twice** before changes - ensure alignment with project goals
+
+Update triggers: new patterns, better workflows, architectural decisions, outdated instructions.
+
+---
+
 You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
 
 ## Available MCP Tools:
