@@ -1,4 +1,6 @@
-# sv
+# Twisty simulator
+
+Deployed here [twisty-simulator.vercel.app](https://twisty-simulator.vercel.app/)
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
