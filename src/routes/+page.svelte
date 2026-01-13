@@ -77,7 +77,10 @@
     <ul class="mt-1 space-y-1 text-xs text-gray-600">
       <li><strong>Sexy Move:</strong> R U R' U'</li>
       <li><strong>T-Perm:</strong> R U R' U' R' F R2 U' R' U' R U R' F'</li>
-      <li><strong>Cube Rotation:</strong> x y' z</li>
+      <li><strong>Double Moves:</strong> R2 U2 F2</li>
+      <li><strong>Wide Moves:</strong> Rw U Rw' U' (or r U r' U')</li>
+      <li><strong>Slice Moves:</strong> M2 E2 S2</li>
+      <li><strong>Cube Rotations:</strong> x2 y2 z2</li>
     </ul>
   </div>
 </div>

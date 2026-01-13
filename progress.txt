@@ -1,0 +1,23 @@
+## 2026-01-13 - Complete Rubik's Cube Notation Support
+
+**Implemented:**
+- All standard Rubik's cube notations (69 total moves)
+- Double moves: U2, D2, R2, L2, F2, B2, x2, y2, z2
+- Wide moves: u/Uw, d/Dw, r/Rw, l/Lw, f/Fw, b/Bw (all variants)
+- Slice moves: M, M', M2, E, E', E2, S, S', S2
+- Updated AlgorithmExecutor validation
+- UI examples expanded with new notations
+
+**Testing:**
+- 54 unit tests in cube-engine.spec.ts
+- All variations tested including cancellation, equivalence, complex algorithms
+- Browser verified: double moves, slice moves working correctly
+- All lints + tests passing (56/56)
+
+**Files Modified:**
+- src/lib/cube-engine.ts:1-407
+- src/lib/algorithm-executor.ts:22-98
+- src/lib/cube-engine.spec.ts (new)
+- src/routes/+page.svelte:75-86
+- src/routes/page.svelte.spec.ts:6-13
+- tasks.yaml:2-12
