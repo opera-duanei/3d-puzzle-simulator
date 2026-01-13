@@ -1,3 +1,30 @@
+## 2026-01-13 - Shuffle Cube Feature
+
+**Implemented:**
+- Shuffle button generates 25 random moves from solved state
+- Algorithm displayed in purple box
+- Resets cube before shuffling for consistency
+- Uses basic moves only (U, D, L, R, F, B + prime/2 variants)
+- Each click generates new random shuffle
+
+**UI Changes:**
+- Added purple "Shuffle Cube" button at top
+- Shuffle algorithm displayed in purple box when active
+- Changed heading from "Algorithm Executor" → "Rubik's Cube"
+- Updated $state runes for reactive variables
+
+**Testing:**
+- Browser verified: shuffle generates 25 moves, animates correctly
+- Browser verified: new shuffle clears previous, generates new algorithm
+- All lints + tests passing (56/56)
+
+**Files Modified:**
+- src/routes/+page.svelte:1-131 (shuffle logic + UI)
+- src/routes/page.svelte.spec.ts:7,12 (heading text updated)
+- tasks.yaml:42-51
+
+---
+
 ## 2026-01-13 - Fix Notation Input Bug
 
 **Problem:**

@@ -4,11 +4,11 @@ import { render } from "vitest-browser-svelte";
 import Page from "./+page.svelte";
 
 describe("/+page.svelte", () => {
-  it("should render Algorithm Executor heading", async () => {
+  it("should render Rubik's Cube heading", async () => {
     render(Page);
 
     const heading = page.getByRole("heading", { level: 1 });
     await expect.element(heading).toBeInTheDocument();
-    await expect.element(heading).toHaveTextContent("Algorithm Executor");
+    await expect.element(heading).toHaveTextContent("Rubik's Cube");
   });
 });
