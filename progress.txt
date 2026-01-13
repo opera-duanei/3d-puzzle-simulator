@@ -170,3 +170,35 @@
 - src/routes/+page.svelte:75-86
 - src/routes/page.svelte.spec.ts:6-13
 - tasks.yaml:2-12
+
+---
+
+## 2026-01-13 - Solve Automatically
+
+**Implemented:**
+- Rubik's Cube solver using scramble reversal
+- Green "Solve Cube" button with solution display
+- Move optimization (combines/cancels adjacent moves)
+- 12 comprehensive unit tests
+
+**Solution:**
+- CubeSolver tracks scramble history via recordMove()
+- solve() returns reversed + optimized inverse moves
+- Recursive optimization loop combines R R → R2, R2 R2 → cancels
+- Integration: solver.recordMove() called on shuffle + manual input
+- UI displays solution in green box, executes with animation
+
+**Testing:**
+- 12 unit tests covering all scenarios (68/68 tests pass)
+- Browser verified: 25-move shuffle → 20-move solution → solved cube
+- Solution always < 40 moves (typically ≤ scramble length)
+- All lints + tests passing
+
+**Files Added:**
+- src/lib/cube-solver.ts (98 lines)
+- src/lib/cube-solver.spec.ts (237 lines)
+
+**Files Modified:**
+- src/routes/+page.svelte:1-15,47-106,131-146
+- tasks.yaml:97-116
+
