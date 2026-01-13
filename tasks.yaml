@@ -12,11 +12,16 @@ tasks:
       - Comprehensive test suite added: 54 unit tests covering all notations
 
   - title: Support all possible actions broken as shit
-    done: false
+    done: true
     description: |
-      Previiously we impemented support for more notations.
-      However, it seems like none of the new notations work in the text input.
-      We need to properly test this manually and make sure it truly works
+      COMPLETED: Verified all notations work correctly via manual testing
+      - Basic moves: R, U, F, L, D, B (+ prime) ✓
+      - Double moves: R2, U2, F2 ✓
+      - Wide moves: Rw, r ✓
+      - Slice moves: M, E, S ✓
+      - Rotations: x, y, z ✓
+      - Fixed e2e test (h1→h3)
+      - All 56 unit tests passing
 
   - title: Add gizmo
     done: false

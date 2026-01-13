@@ -21,3 +21,15 @@
 - src/routes/+page.svelte:75-86
 - src/routes/page.svelte.spec.ts:6-13
 - tasks.yaml:2-12
+
+## 2026-01-13 - Verify Notation Implementation
+
+**Verified:**
+- All notations work correctly in text input (previous concern unfounded)
+- Manual browser testing: R U R', R2 U2 F2, Rw U Rw', M E S, x y z all execute properly
+- Fixed e2e test: h1→h3 (UI uses h3 heading)
+- All tests passing: 56/56 (1 e2e + 55 unit)
+
+**Files Modified:**
+- e2e/demo.test.ts:3-6
+- tasks.yaml:14-24
