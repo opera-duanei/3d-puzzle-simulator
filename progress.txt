@@ -1,3 +1,27 @@
+## 2026-01-13 - Add Gizmo
+
+**Implemented:**
+- Three.js AxesHelper displays RGB axes (X=red, Y=green, Z=blue)
+- Gizmo synchronizes with cube orientation during rotations
+- Quaternion-based tracking for accurate orientation display
+
+**Solution:**
+- Created gizmo as THREE.Group with AxesHelper
+- Added gizmo to rotateCube pivot during animations
+- Extracted world quaternion after animation, applied to gizmo
+- Gizmo remains in scene, updates orientation with cube
+
+**Testing:**
+- Browser verified: x2 y2 rotates gizmo correctly
+- Gizmo axes point in expected directions after rotation
+- All lints + tests passing (56/56)
+
+**Files Modified:**
+- src/lib/components/RubiksCube.svelte:18,23-30,145-146,185-191,240
+- tasks.yaml:30-40
+
+---
+
 ## 2026-01-13 - Fix Light Source
 
 **Problem:**
