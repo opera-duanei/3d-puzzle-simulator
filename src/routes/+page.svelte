@@ -1,14 +1,59 @@
 <script lang="ts">
   import RubiksCube from "$lib/components/RubiksCube.svelte";
-  import { CubeEngine } from "$lib/cube-engine";
+  import { CubeEngine, type Move } from "$lib/cube-engine";
   import { AlgorithmExecutor } from "$lib/algorithm-executor";
 
   let cubeComponent: RubiksCube;
   const engine = new CubeEngine();
   const executor = new AlgorithmExecutor();
 
-  let algorithmInput = "";
-  let isExecuting = false;
+  let algorithmInput = $state("");
+  let isExecuting = $state(false);
+  let shuffleAlgorithm = $state("");
+
+  const BASIC_MOVES: Move[] = [
+    "U",
+    "U'",
+    "U2",
+    "D",
+    "D'",
+    "D2",
+    "L",
+    "L'",
+    "L2",
+    "R",
+    "R'",
+    "R2",
+    "F",
+    "F'",
+    "F2",
+    "B",
+    "B'",
+    "B2",
+  ];
+
+  function generateShuffleAlgorithm(): string {
+    const moves: Move[] = [];
+    for (let i = 0; i < 25; i++) {
+      const randomMove = BASIC_MOVES[Math.floor(Math.random() * BASIC_MOVES.length)];
+      moves.push(randomMove);
+    }
+    return moves.join(" ");
+  }
+
+  async function shuffleCube() {
+    if (isExecuting) return;
+
+    engine.reset();
+    const newShuffle = generateShuffleAlgorithm();
+    shuffleAlgorithm = newShuffle;
+
+    isExecuting = true;
+    await executor.executeAlgorithm(newShuffle, async (move) => {
+      await cubeComponent.executeMove(move);
+    });
+    isExecuting = false;
+  }
 
   async function executeAlgorithm() {
     if (!algorithmInput.trim() || isExecuting) return;
@@ -26,6 +71,7 @@
 
   function resetCube() {
     engine.reset();
+    shuffleAlgorithm = "";
     location.reload();
   }
 </script>
@@ -33,7 +79,24 @@
 <RubiksCube bind:this={cubeComponent} {engine} {executor} />
 
 <div class="fixed top-5 left-5 max-w-md rounded-lg bg-white/90 p-5 shadow-lg">
-  <h1 class="mb-3 text-lg font-semibold text-gray-800">Algorithm Executor</h1>
+  <h1 class="mb-3 text-lg font-semibold text-gray-800">Rubik's Cube</h1>
+
+  <div class="mb-4">
+    <button
+      onclick={shuffleCube}
+      disabled={isExecuting}
+      class="w-full rounded border-2 border-purple-600 bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      {isExecuting && shuffleAlgorithm ? "Shuffling..." : "Shuffle Cube"}
+    </button>
+  </div>
+
+  {#if shuffleAlgorithm}
+    <div class="mb-4 rounded bg-purple-50 p-3">
+      <p class="text-xs font-semibold text-purple-900">Shuffle Algorithm:</p>
+      <p class="mt-1 text-xs break-words text-purple-700">{shuffleAlgorithm}</p>
+    </div>
+  {/if}
 
   <div class="mb-4">
     <input
@@ -51,7 +114,7 @@
       disabled={isExecuting || !algorithmInput.trim()}
       class="flex-1 rounded border-2 border-blue-600 bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      {isExecuting ? "Executing..." : "Execute"}
+      {isExecuting && !shuffleAlgorithm ? "Executing..." : "Execute"}
     </button>
 
     {#if isExecuting}

@@ -44,7 +44,7 @@ tasks:
       You may need to use some sort of raytracing to solve this. Investigate what an appopriate way in three.js is.
 
   - title: Shuffle cube
-    done: false
+    done: true
     description: |
       It should be possible to shuffle the cube
       - Shuffle algorithm should be visible on the screen
@@ -52,6 +52,14 @@ tasks:
       - When a new shuffle is triggered, it should animate the shuffle
       - Shuffling should always happen from a solved cube.
       - Use 25 random moves to shuffle
+
+      COMPLETED: Shuffle functionality implemented
+      - Purple "Shuffle Cube" button generates random 25-move algorithm
+      - Algorithm displayed in purple box below button
+      - Resets cube to solved state before shuffling
+      - Animates all moves with existing animation system
+      - Each shuffle generates new random algorithm
+      - Uses basic moves only (U, D, L, R, F, B + prime/2 variants)
 
   - title: Solve automatically
     done: false
