@@ -159,7 +159,7 @@ tasks:
       - Solution algorithm displayed correctly
 
   - title: Solve automatically with ZZ
-    status: Implemented
+    status: Accepted
     description: |
       This is a follow-up of "Solve automatically"
       - There should be an option to find a ZZ solution
@@ -175,6 +175,13 @@ tasks:
       - Browser verified: shuffle (25 moves) → ZZ solve (21 moves) → solved ✓
       - Files added: src/lib/zz-solver.ts, src/lib/zz-solver.spec.ts
       - Files modified: src/routes/+page.svelte (ZZ UI integration)
+
+      ACCEPTED 2026-01-13: Browser verification passed
+      - Shuffle (25 moves) → ZZ solve (20 moves) → cube solved ✓
+      - All faces show solid colors (solved state)
+      - Solution < 40 moves requirement met ✓
+      - UI correctly displays "ZZ (EOLine, F2L, LL)" method
+      - Solution algorithm displayed correctly
 
   - title: Fix colors
     status: Accepted
