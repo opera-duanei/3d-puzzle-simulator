@@ -2,14 +2,18 @@
   import RubiksCube from "$lib/components/RubiksCube.svelte";
   import { CubeEngine, type Move } from "$lib/cube-engine";
   import { AlgorithmExecutor } from "$lib/algorithm-executor";
+  import { CubeSolver } from "$lib/cube-solver";
 
   let cubeComponent: RubiksCube;
   const engine = new CubeEngine();
   const executor = new AlgorithmExecutor();
+  const solver = new CubeSolver();
 
   let algorithmInput = $state("");
   let isExecuting = $state(false);
   let shuffleAlgorithm = $state("");
+  let solutionAlgorithm = $state("");
+  let isSolving = $state(false);
 
   const BASIC_MOVES: Move[] = [
     "U",
@@ -72,7 +76,26 @@
   function resetCube() {
     engine.reset();
     shuffleAlgorithm = "";
+    solutionAlgorithm = "";
     location.reload();
+  }
+
+  async function solveCube() {
+    if (isExecuting || isSolving) return;
+
+    isSolving = true;
+    const solution = solver.solve();
+    solutionAlgorithm = solution.join(" ");
+
+    if (solution.length > 0) {
+      isExecuting = true;
+      await executor.executeAlgorithm(solutionAlgorithm, async (move) => {
+        await cubeComponent.executeMove(move);
+      });
+      isExecuting = false;
+    }
+
+    isSolving = false;
   }
 </script>
 
@@ -95,6 +118,25 @@
     <div class="mb-4 rounded bg-purple-50 p-3">
       <p class="text-xs font-semibold text-purple-900">Shuffle Algorithm:</p>
       <p class="mt-1 text-xs break-words text-purple-700">{shuffleAlgorithm}</p>
+    </div>
+  {/if}
+
+  <div class="mb-4">
+    <button
+      onclick={solveCube}
+      disabled={isExecuting || isSolving}
+      class="w-full rounded border-2 border-green-600 bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      {isSolving ? "Solving..." : "Solve Cube"}
+    </button>
+  </div>
+
+  {#if solutionAlgorithm}
+    <div class="mb-4 rounded bg-green-50 p-3">
+      <p class="text-xs font-semibold text-green-900">
+        Solution Algorithm ({solutionAlgorithm.split(" ").length} moves):
+      </p>
+      <p class="mt-1 text-xs break-words text-green-700">{solutionAlgorithm}</p>
     </div>
   {/if}
 
