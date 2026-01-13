@@ -77,7 +77,7 @@ tasks:
       - Uses basic moves only (U, D, L, R, F, B + prime/2 variants)
 
   - title: Add "How I used Claude Code" section to README
-    status: Implemented
+    status: Accepted
     description: |
       Add short README section documenting Claude Code workflow
       - 5-10 bullet points explaining usage approach
