@@ -27,7 +27,7 @@ for ((i=1; i<=$1; i++)); do
 2. Create a new branch for the feature
 3. Check that linters and tests passes with \`pnpm lint\` and \`pnpm test\`
 4. Start dev server with \`pnpm dev\` if needed, navigate to http://localhost:5173 in chrome-mcp, verify UI renders and interactions work.
-5. Update tasks.yaml with the work that was done.
+5. Update done to true tasks.yaml for the task that was done
 6. Append your progress to progress.txt file.
    Use this to leave a note for the next person working in the codebase.
 7. Create a git commit with all your changes.
