@@ -34,7 +34,7 @@ for ((i=1; i<=$1; i++)); do
 8. Open a PR using gh.
 
 ONLY WORK ON A SINGLE FEATURE
-If, while implementing the feature, you notice the feature complete, output <promise>COMPLETE</promise>")
+If, while implementing a feature, you notice the all tasks are done complete, output <promise>COMPLETE</promise>")
 
   if [[ "$result" == *"<promise>COMPLETE</promise>"* ]]; then
     echo -e "\n${GREEN}${BOLD}✓ Task complete${RESET} - All iterations finished\n"
