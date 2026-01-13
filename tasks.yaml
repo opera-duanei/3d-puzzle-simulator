@@ -77,3 +77,16 @@ tasks:
       This is a follow-up of "Solve automatically"
       - There should be an option to find a ZZ solution
       - You may need to research what the algorithm means
+
+  - title: Fix colors
+    done: false
+    description: |
+      - Drop the transparency on the cube colors
+      - Some side have a big black square in the middle. This is wrong and needs to be fixed.
+
+  - title: Fix light source
+    done: false
+    description: |
+      Something seems to be wrong with then light source.
+      It looks like the camera is moving, because one side of the cube is darker than the other.
+      When we rotate the cube, we want the cube to rotate, not the camera. We want the light to have a consistent direction, independently of the cube rotation.
