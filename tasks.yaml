@@ -10,3 +10,66 @@ tasks:
       - Cube rotations: x, y, z (+ prime and 2 variants)
       - UI updated with new example algorithms
       - Comprehensive test suite added: 54 unit tests covering all notations
+
+  - title: Support all possible actions broken as shit
+    done: false
+    description: |
+      Previiously we impemented support for more notations.
+      However, it seems like none of the new notations work in the text input.
+      We need to properly test this manually and make sure it truly works
+
+  - title: Add gizmo
+    done: false
+    description: |
+      When rotating the cube, we want to show a gizmo.
+      - Show a gizmo that is always synced with the cube orientation
+
+  - title: Add interactive controls.
+    done: false
+    description: |
+      It should be possible to rotate cube layers by click and dragging the cube. 
+      - Click and dragging should rotate the clicked layers
+      - Since "a sticker" can typically be dragged in 4 different directions, the "dominant drag direction" should decide how the cube is changed.
+      - As long the is holding down the mouse button, the layers should follow the point. Only when the mouse button is released, the layer should "lock in to a final state"
+      - If user releases the mouse button while dragging, a combination of velocity and position should decide what the "locked state" will be. For example, "a flick" should make a turn, even though it's probably release close to the original state.
+      You may need to use some sort of raytracing to solve this. Investigate what an appopriate way in three.js is.
+
+  - title: Shuffle cube
+    done: false
+    description: |
+      It should be possible to shuffle the cube
+      - Shuffle algorithm should be visible on the screen
+      - There should be a button to generate a new shuffle
+      - When a new shuffle is triggered, it should animate the shuffle
+      - Shuffling should always happen from a solved cube.
+      - Use 25 random moves to shuffle
+
+  - title: Solve automatically
+    done: false
+    description: |
+      Implement a solver
+      - There should be a button trigger a solve
+      - The solver should automatically find a way to solve the cube. Must be in less than 40 moves.
+      - Implement unittests to test the engine behind it
+      - The solve algorithm should be visible on the screen
+
+  - title: Solve automatically with CFOP
+    done: false
+    description: |
+      This is a follow-up of "Solve automatically"
+      - There should be an option to find a CFOP solution
+      - You may need to research what the algorithm means
+
+  - title: Solve automatically with ROUX
+    done: false
+    description: |
+      This is a follow-up of "Solve automatically"
+      - There should be an option to find a ROUX solution
+      - You may need to research what the algorithm means
+
+  - title: Solve automatically with ZZ
+    done: false
+    description: |
+      This is a follow-up of "Solve automatically"
+      - There should be an option to find a ZZ solution
+      - You may need to research what the algorithm means
