@@ -170,3 +170,24 @@
 - src/routes/+page.svelte:75-86
 - src/routes/page.svelte.spec.ts:6-13
 - tasks.yaml:2-12
+
+## 2026-01-13 - Add Claude Code Section to README
+
+**Implemented:**
+- Added "How I used Claude Code" section to README
+- Documented task manager workflow (tasks.yaml + ralph.sh)
+- Status-based progression: Todo → Implemented → Accepted/Rejected
+- Chrome DevTools MCP browser testing workflow
+
+**Content:**
+- 5 workflow bullet points (task manager, status flow, browser testing, verification, progress tracking)
+- 3 key iteration examples with solutions (notation support, interactive controls, light source)
+- 2 concrete prompt examples with outcomes
+
+**Testing:**
+- All lints + tests passing (56/56)
+
+**Files Modified:**
+- README.md:7-31
+- tasks.yaml:79-95
+
