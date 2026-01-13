@@ -31,7 +31,7 @@ b. **Implemented task exists?** Test first Implemented task:
    - Start dev server with \`pnpm dev\` if needed
    - Navigate to http://localhost:5173 in chrome-mcp
    - Verify UI renders correctly and all interactions work as described
-   - If works: change status to Accepted
+   - If works: change status to Accepted, commit and then open a PR with gh.
    - If broken: change status to Rejected, add failure details to description
 c. **Todo task exists?** Implement first Todo task:
    - Create new branch for feature
@@ -42,7 +42,6 @@ c. **Todo task exists?** Implement first Todo task:
    - Append implementation notes to description (keep original requirements)
    - Append progress to progress.txt
    - Commit changes
-   - Open PR using gh
 d. **All Accepted?** Output <promise>COMPLETE</promise>
 
 CRITICAL:
