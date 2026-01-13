@@ -1,3 +1,30 @@
+## 2026-01-13 - Add Interactive Controls
+
+**Implemented:**
+- Click + drag on cube face executes layer move
+- Three.js Raycaster for face detection + world normal calculation
+- Drag direction (horizontal/vertical) determines move type
+- Velocity + distance thresholds for snap-to-position logic
+
+**Solution:**
+- Added pointer event handlers (down, move, up) to canvas
+- Raycaster intersects cube meshes, extracts face normal
+- World normal computed using piece quaternion for rotation tracking
+- Dominant drag direction + piece position determines move
+- OrbitControls disabled during drag to prevent camera rotation
+- Small drags (<10px) ignored to prevent accidental moves
+
+**Testing:**
+- Browser verified: drag gestures execute correct moves (R, U, F, etc.)
+- All layer moves supported (U, D, R, L, F, B, M, E, S + prime)
+- All lints + tests passing (56/56)
+
+**Files Modified:**
+- src/lib/components/RubiksCube.svelte:19-23,227-334,373-376,378-381
+- tasks.yaml:42-59
+
+---
+
 ## 2026-01-13 - Add Gizmo
 
 **Implemented:**

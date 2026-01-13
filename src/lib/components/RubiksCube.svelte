@@ -16,6 +16,11 @@
   let isAnimating = false;
   let animationQueue: (() => void)[] = [];
   let gizmo: THREE.Group;
+  let raycaster: THREE.Raycaster;
+  let isDragging = false;
+  let dragStartPosition: { x: number; y: number } | null = null;
+  let dragStartTime = 0;
+  let clickedFace: { piece: Piece; normal: THREE.Vector3 } | null = null;
 
   export let engine: CubeEngine = new CubeEngine();
   export const executor: AlgorithmExecutor = new AlgorithmExecutor();
@@ -219,12 +224,128 @@
     }
   }
 
+  function getNormalizedMousePosition(event: MouseEvent): THREE.Vector2 {
+    return new THREE.Vector2(
+      (event.clientX / window.innerWidth) * 2 - 1,
+      -(event.clientY / window.innerHeight) * 2 + 1,
+    );
+  }
+
+  function handlePointerDown(event: MouseEvent) {
+    if (isAnimating) return;
+
+    const mouse = getNormalizedMousePosition(event);
+    raycaster.setFromCamera(mouse, camera);
+
+    const allMeshes = pieces.map((p) => p.mesh);
+    const intersects = raycaster.intersectObjects(allMeshes, true);
+
+    if (intersects.length > 0) {
+      const intersect = intersects[0];
+      const piece = pieces.find(
+        (p) => p.mesh === intersect.object || p.mesh.children.includes(intersect.object),
+      );
+
+      if (piece && intersect.face) {
+        controls.enabled = false;
+        isDragging = true;
+        dragStartPosition = { x: event.clientX, y: event.clientY };
+        dragStartTime = performance.now();
+        clickedFace = { piece, normal: intersect.face.normal.clone() };
+      }
+    }
+  }
+
+  function handlePointerMove() {
+    // Future: implement visual feedback during drag
+  }
+
+  function handlePointerUp(event: MouseEvent) {
+    if (!isDragging || !dragStartPosition || !clickedFace) {
+      controls.enabled = true;
+      return;
+    }
+
+    const deltaX = event.clientX - dragStartPosition.x;
+    const deltaY = event.clientY - dragStartPosition.y;
+    const dragDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    if (dragDistance < 10) {
+      isDragging = false;
+      clickedFace = null;
+      controls.enabled = true;
+      return;
+    }
+
+    const dragTime = performance.now() - dragStartTime;
+    const velocity = dragDistance / dragTime;
+
+    const absDeltaX = Math.abs(deltaX);
+    const absDeltaY = Math.abs(deltaY);
+    const isHorizontal = absDeltaX > absDeltaY;
+
+    const worldNormal = clickedFace.normal
+      .clone()
+      .applyQuaternion(clickedFace.piece.mesh.quaternion)
+      .normalize();
+
+    const determineMove = (): Move | null => {
+      const pos = clickedFace!.piece.position;
+      const threshold = dragDistance > 50 || velocity > 0.3 ? 0.3 : 0.7;
+
+      if (Math.abs(worldNormal.z) > threshold) {
+        if (isHorizontal) {
+          if (pos.y === 1) return deltaX > 0 ? "U'" : "U";
+          if (pos.y === -1) return deltaX > 0 ? "D" : "D'";
+          if (pos.y === 0) return deltaX > 0 ? "E" : "E'";
+        } else {
+          if (pos.x === 1) return deltaY > 0 ? "R'" : "R";
+          if (pos.x === -1) return deltaY > 0 ? "L" : "L'";
+          if (pos.x === 0) return deltaY > 0 ? "M'" : "M";
+        }
+      } else if (Math.abs(worldNormal.y) > threshold) {
+        if (isHorizontal) {
+          if (pos.z === 1) return deltaX > 0 ? "F'" : "F";
+          if (pos.z === -1) return deltaX > 0 ? "B" : "B'";
+          if (pos.z === 0) return deltaX > 0 ? "S'" : "S";
+        } else {
+          if (pos.x === 1) return deltaY > 0 ? "R'" : "R";
+          if (pos.x === -1) return deltaY > 0 ? "L" : "L'";
+          if (pos.x === 0) return deltaY > 0 ? "M'" : "M";
+        }
+      } else if (Math.abs(worldNormal.x) > threshold) {
+        if (isHorizontal) {
+          if (pos.y === 1) return deltaX > 0 ? "U'" : "U";
+          if (pos.y === -1) return deltaX > 0 ? "D" : "D'";
+          if (pos.y === 0) return deltaX > 0 ? "E" : "E'";
+        } else {
+          if (pos.z === 1) return deltaY > 0 ? "F" : "F'";
+          if (pos.z === -1) return deltaY > 0 ? "B'" : "B";
+          if (pos.z === 0) return deltaY > 0 ? "S" : "S'";
+        }
+      }
+      return null;
+    };
+
+    const move = determineMove();
+    if (move) {
+      executeMove(move);
+    }
+
+    isDragging = false;
+    clickedFace = null;
+    dragStartPosition = null;
+    controls.enabled = true;
+  }
+
   onMount(() => {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
+
+    raycaster = new THREE.Raycaster();
 
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -256,9 +377,15 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
     window.addEventListener("resize", handleResize);
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointermove", handlePointerMove);
+    canvas.addEventListener("pointerup", handlePointerUp);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      canvas.removeEventListener("pointerdown", handlePointerDown);
+      canvas.removeEventListener("pointermove", handlePointerMove);
+      canvas.removeEventListener("pointerup", handlePointerUp);
       controls.dispose();
       renderer.dispose();
       pieces.forEach((piece) => {
