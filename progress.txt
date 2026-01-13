@@ -1,3 +1,25 @@
+## 2026-01-13 - Fix Light Source
+
+**Problem:**
+- DirectionalLight fixed in world space, not camera space
+- As camera orbits, lighting appears inconsistent across faces
+- Creates illusion that camera moves instead of cube rotating
+
+**Solution:**
+- Attached DirectionalLight to camera instead of scene
+- Added camera to scene (required for lights attached as children)
+- Light now maintains consistent direction relative to viewer
+
+**Testing:**
+- Browser verified: all faces evenly lit during OrbitControls rotation
+- All lints + tests passing (56/56)
+
+**Files Modified:**
+- src/lib/components/RubiksCube.svelte:213,217
+- tasks.yaml:107-118
+
+---
+
 ## 2026-01-13 - Fix Cube Colors
 
 **Problem:**
