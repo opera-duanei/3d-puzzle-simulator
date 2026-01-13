@@ -1,5 +1,5 @@
 tasks:
-  - done: true
+  - status: Implemented
     title: Support all possible actions
     description: |
       COMPLETED: All Rubik's cube notations now supported
@@ -12,7 +12,7 @@ tasks:
       - Comprehensive test suite added: 54 unit tests covering all notations
 
   - title: Support all possible actions broken as shit
-    done: true
+    status: Implemented
     description: |
       Previously we impemented support for more notations.
       However, it seems like none of the new notations work in the text input.
@@ -28,7 +28,7 @@ tasks:
       - Browser verified: R2 U2 F2 M2 E2 S2 executes correctly
 
   - title: Add gizmo
-    done: true
+    status: Implemented
     description: |
       When rotating the cube, we want to show a gizmo.
       - Show a gizmo that is always synced with the cube orientation
@@ -40,7 +40,7 @@ tasks:
       - Browser verified: x2 y2 rotates gizmo correctly
 
   - title: Add interactive controls.
-    done: true
+    status: Implemented
     description: |
       It should be possible to rotate cube layers by click and dragging the cube.
       - Click and dragging should rotate the clicked layers
@@ -59,7 +59,7 @@ tasks:
       - Browser verified: drag gestures execute correct moves
 
   - title: Shuffle cube
-    done: true
+    status: Implemented
     description: |
       It should be possible to shuffle the cube
       - Shuffle algorithm should be visible on the screen
@@ -77,7 +77,7 @@ tasks:
       - Uses basic moves only (U, D, L, R, F, B + prime/2 variants)
 
   - title: Solve automatically
-    done: false
+    status: Todo
     description: |
       Implement a solver
       - There should be a button trigger a solve
@@ -86,28 +86,28 @@ tasks:
       - The solve algorithm should be visible on the screen
 
   - title: Solve automatically with CFOP
-    done: false
+    status: Todo
     description: |
       This is a follow-up of "Solve automatically"
       - There should be an option to find a CFOP solution
       - You may need to research what the algorithm means
 
   - title: Solve automatically with ROUX
-    done: false
+    status: Todo
     description: |
       This is a follow-up of "Solve automatically"
       - There should be an option to find a ROUX solution
       - You may need to research what the algorithm means
 
   - title: Solve automatically with ZZ
-    done: false
+    status: Todo
     description: |
       This is a follow-up of "Solve automatically"
       - There should be an option to find a ZZ solution
       - You may need to research what the algorithm means
 
   - title: Fix colors
-    done: true
+    status: Implemented
     description: |
       - Drop the transparency on the cube colors
       - Some side have a big black square in the middle. This is wrong and needs to be fixed.
@@ -120,7 +120,7 @@ tasks:
       - Browser verified: no visible black squares, colors are solid
 
   - title: Fix light source
-    done: true
+    status: Implemented
     description: |
       Something seems to be wrong with then light source.
       It looks like the camera is moving, because one side of the cube is darker than the other.

@@ -22,19 +22,35 @@ for ((i=1; i<=$1; i++)); do
   echo -e "${CYAN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
 
   result=$(claude --permission-mode bypassPermissions -p "@tasks.yaml @progress.txt
-1. Find the highest-priority tasks to work on and work only on that feature.
-   This should be the one YOU decide has the highest priority - not necessarily the first in the list.
-2. Create a new branch for the feature
-3. Check that linters and tests passes with \`pnpm lint\` and \`pnpm test\`
-4. Start dev server with \`pnpm dev\` if needed, navigate to http://localhost:5173 in chrome-mcp, verify UI renders and interactions work.
-5. Update done to true tasks.yaml for the task that was done. You may append to the description, but DO NOT change the existing description.
-6. Append your progress to progress.txt file.
-   Use this to leave a note for the next person working in the codebase.
-7. Create a git commit with all your changes.
-8. Open a PR using gh.
 
-ONLY WORK ON A SINGLE FEATURE
-If, while implementing a feature, you notice the all tasks are done complete, output <promise>COMPLETE</promise>")
+Pick ONE task from tasks.yaml following this priority order:
+
+a. **Rejected task exists?** Fix issues described in description of first Rejected task
+b. **Implemented task exists?** Test first Implemented task:
+   - Read description carefully to understand expected behavior
+   - Start dev server with \`pnpm dev\` if needed
+   - Navigate to http://localhost:5173 in chrome-mcp
+   - Verify UI renders correctly and all interactions work as described
+   - If works: change status to Accepted
+   - If broken: change status to Rejected, add failure details to description
+c. **Todo task exists?** Implement first Todo task:
+   - Create new branch for feature
+   - Implement the feature
+   - Run \`pnpm lint\` and \`pnpm test\` - must pass
+   - Start dev server, verify in chrome-mcp at http://localhost:5173
+   - Change status to Implemented
+   - Append implementation notes to description (keep original requirements)
+   - Append progress to progress.txt
+   - Commit changes
+   - Open PR using gh
+d. **All Accepted?** Output <promise>COMPLETE</promise>
+
+CRITICAL:
+- Work on ONE task only
+- DO NOT modify original task requirements in description
+- For Implemented tasks: ONLY verify, do not implement
+- For Rejected tasks: Fix what's broken, then set to Implemented
+- Status flow: Todo -> Implemented -> Accepted OR Implemented -> Rejected -> Implemented -> Accepted")
 
   if [[ "$result" == *"<promise>COMPLETE</promise>"* ]]; then
     echo -e "\n${GREEN}${BOLD}✓ Task complete${RESET} - All iterations finished\n"
