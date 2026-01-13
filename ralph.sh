@@ -24,12 +24,14 @@ for ((i=1; i<=$1; i++)); do
   result=$(claude --permission-mode bypassPermissions -p "@tasks.yaml @progress.txt
 1. Find the highest-priority tasks to work on and work only on that feature.
    This should be the one YOU decide has the highest priority - not necessarily the first in the list.
-2. Check that linters and tests passes with \`pnpm lint\` and \`pnpm test\`
-3. Start dev server with \`pnpm dev\` if needed, navigate to http://localhost:5173 in chrome-mcp, verify UI renders and interactions work.
-4. Update tasks.yaml with the work that was done.
-5. Append your progress to progress.txt file.
+2. Create a new branch for the feature
+3. Check that linters and tests passes with \`pnpm lint\` and \`pnpm test\`
+4. Start dev server with \`pnpm dev\` if needed, navigate to http://localhost:5173 in chrome-mcp, verify UI renders and interactions work.
+5. Update tasks.yaml with the work that was done.
+6. Append your progress to progress.txt file.
    Use this to leave a note for the next person working in the codebase.
-6. Create a git commit with all your changes.
+7. Create a git commit with all your changes.
+8. Open a PR using gh.
 
 ONLY WORK ON A SINGLE FEATURE
 If, while implementing the feature, you notice the feature complete, output <promise>COMPLETE</promise>")
