@@ -76,6 +76,17 @@ tasks:
       - Each shuffle generates new random algorithm
       - Uses basic moves only (U, D, L, R, F, B + prime/2 variants)
 
+  - title: Add "How I used Claude Code" section to README
+    status: Todo
+    description: |
+      Add short README section documenting Claude Code workflow
+      - 5-10 bullet points explaining usage approach
+      - 2-3 examples of prompts/iterations that mattered
+      - Include that task manager (tasks.yaml + ralph.sh) was used to answer this question
+      - Mention automated workflow: ralph.sh orchestrating multi-iteration development
+      - Reference Chrome DevTools MCP for browser testing
+      - Highlight status-based workflow (Todo/Implemented/Rejected/Accepted)
+
   - title: Solve automatically
     status: Todo
     description: |
@@ -84,6 +95,7 @@ tasks:
       - The solver should automatically find a way to solve the cube. Must be in less than 40 moves.
       - Implement unittests to test the engine behind it
       - The solve algorithm should be visible on the screen
+      If you shuffle, and then solve, the cube should get back to the solved state.
 
   - title: Solve automatically with CFOP
     status: Todo
@@ -91,6 +103,7 @@ tasks:
       This is a follow-up of "Solve automatically"
       - There should be an option to find a CFOP solution
       - You may need to research what the algorithm means
+      If you shuffle, and then solve, the cube should get back to the solved state.
 
   - title: Solve automatically with ROUX
     status: Todo
@@ -98,6 +111,7 @@ tasks:
       This is a follow-up of "Solve automatically"
       - There should be an option to find a ROUX solution
       - You may need to research what the algorithm means
+      If you shuffle, and then solve, the cube should get back to the solved state.
 
   - title: Solve automatically with ZZ
     status: Todo
@@ -105,6 +119,7 @@ tasks:
       This is a follow-up of "Solve automatically"
       - There should be an option to find a ZZ solution
       - You may need to research what the algorithm means
+      If you shuffle, and then solve, the cube should get back to the solved state.
 
   - title: Fix colors
     status: Implemented
@@ -131,3 +146,8 @@ tasks:
       - Added camera to scene (required for child lights to work)
       - Light now moves with viewer, maintaining consistent illumination
       - Browser verified: all cube faces evenly lit during rotation
+
+  - title: Fix whole in the middle
+    status: Todo
+    description: |
+      Each side of the cube should have 9 "stickers". Some sides seems to just have a big hole in the middle.
