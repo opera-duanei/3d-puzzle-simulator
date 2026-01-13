@@ -21,7 +21,7 @@ for ((i=1; i<=$1; i++)); do
   echo -e "${BLUE}${BOLD}Iteration $i${RESET}"
   echo -e "${CYAN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
 
-  result=$(claude --permission-mode acceptEdits -p "@tasks.yaml @progress.txt
+  result=$(claude --permission-mode bypassPermissions -p "@tasks.yaml @progress.txt
 1. Find the highest-priority tasks to work on and work only on that feature.
    This should be the one YOU decide has the highest priority - not necessarily the first in the list.
 2. Check that linters and tests passes with \`pnpm lint\` and \`pnpm test\`
