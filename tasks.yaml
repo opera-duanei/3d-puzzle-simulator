@@ -116,7 +116,7 @@ tasks:
       - Files modified: src/routes/+page.svelte (solver UI integration)
 
   - title: Solve automatically with CFOP
-    status: Implemented
+    status: Accepted
     description: |
       This is a follow-up of "Solve automatically"
       - There should be an option to find a CFOP solution
