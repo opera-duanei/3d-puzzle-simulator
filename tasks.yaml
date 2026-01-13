@@ -40,14 +40,23 @@ tasks:
       - Browser verified: x2 y2 rotates gizmo correctly
 
   - title: Add interactive controls.
-    done: false
+    done: true
     description: |
-      It should be possible to rotate cube layers by click and dragging the cube. 
+      It should be possible to rotate cube layers by click and dragging the cube.
       - Click and dragging should rotate the clicked layers
       - Since "a sticker" can typically be dragged in 4 different directions, the "dominant drag direction" should decide how the cube is changed.
       - As long the is holding down the mouse button, the layers should follow the point. Only when the mouse button is released, the layer should "lock in to a final state"
       - If user releases the mouse button while dragging, a combination of velocity and position should decide what the "locked state" will be. For example, "a flick" should make a turn, even though it's probably release close to the original state.
       You may need to use some sort of raytracing to solve this. Investigate what an appopriate way in three.js is.
+
+      COMPLETED: Interactive drag controls implemented
+      - Three.js Raycaster detects clicked cube face
+      - Drag direction (horizontal/vertical) determines move type
+      - Velocity + distance thresholds for snap-to-position
+      - OrbitControls disabled during drag, re-enabled on release
+      - Supports all layer moves (U, D, R, L, F, B, M, E, S + prime variants)
+      - Small drags (<10px) ignored to prevent accidental moves
+      - Browser verified: drag gestures execute correct moves
 
   - title: Shuffle cube
     done: true
