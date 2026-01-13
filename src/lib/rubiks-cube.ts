@@ -7,7 +7,7 @@ const COLORS = {
   orange: 0xff6600,
   green: 0x00ff00,
   blue: 0x0000ff,
-  black: 0x000000,
+  internal: 0x000000,
 };
 
 const FACE_COLORS = [
@@ -30,14 +30,37 @@ export function createCornerPiece(x: number, y: number, z: number): THREE.Group 
   const mainSize = 0.95;
   const mainGeo = new THREE.BoxGeometry(mainSize, mainSize, mainSize);
   const materials = FACE_COLORS.map((color, index) => {
-    let faceColor = COLORS.black;
-    if (index === 0 && x === 1) faceColor = color;
-    if (index === 1 && x === -1) faceColor = color;
-    if (index === 2 && y === 1) faceColor = color;
-    if (index === 3 && y === -1) faceColor = color;
-    if (index === 4 && z === 1) faceColor = color;
-    if (index === 5 && z === -1) faceColor = color;
-    return new THREE.MeshPhongMaterial({ color: faceColor, transparent: true, opacity: 0.7 });
+    let faceColor = COLORS.internal;
+    let isExterior = false;
+    if (index === 0 && x === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 1 && x === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 2 && y === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 3 && y === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 4 && z === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 5 && z === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    return new THREE.MeshPhongMaterial({
+      color: faceColor,
+      emissive: isExterior ? 0x000000 : 0x000000,
+      emissiveIntensity: 0,
+    });
   });
   const mainCube = new THREE.Mesh(mainGeo, materials);
   group.add(mainCube);
@@ -60,14 +83,37 @@ export function createEdgePiece(x: number, y: number, z: number): THREE.Group {
   const mainSize = 0.95;
   const mainGeo = new THREE.BoxGeometry(mainSize, mainSize, mainSize);
   const materials = FACE_COLORS.map((color, index) => {
-    let faceColor = COLORS.black;
-    if (index === 0 && x === 1) faceColor = color;
-    if (index === 1 && x === -1) faceColor = color;
-    if (index === 2 && y === 1) faceColor = color;
-    if (index === 3 && y === -1) faceColor = color;
-    if (index === 4 && z === 1) faceColor = color;
-    if (index === 5 && z === -1) faceColor = color;
-    return new THREE.MeshPhongMaterial({ color: faceColor, transparent: true, opacity: 0.7 });
+    let faceColor = COLORS.internal;
+    let isExterior = false;
+    if (index === 0 && x === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 1 && x === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 2 && y === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 3 && y === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 4 && z === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 5 && z === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    return new THREE.MeshPhongMaterial({
+      color: faceColor,
+      emissive: isExterior ? 0x000000 : 0x000000,
+      emissiveIntensity: 0,
+    });
   });
   const mainCube = new THREE.Mesh(mainGeo, materials);
   group.add(mainCube);
@@ -108,14 +154,37 @@ export function createCenterPiece(x: number, y: number, z: number): THREE.Group 
   const capSize = 0.95;
   const capGeo = new THREE.BoxGeometry(capSize, capSize, 0.2);
   const materials = FACE_COLORS.map((color, index) => {
-    let faceColor = COLORS.black;
-    if (index === 0 && x === 1) faceColor = color;
-    if (index === 1 && x === -1) faceColor = color;
-    if (index === 2 && y === 1) faceColor = color;
-    if (index === 3 && y === -1) faceColor = color;
-    if (index === 4 && z === 1) faceColor = color;
-    if (index === 5 && z === -1) faceColor = color;
-    return new THREE.MeshPhongMaterial({ color: faceColor, transparent: true, opacity: 0.7 });
+    let faceColor = COLORS.internal;
+    let isExterior = false;
+    if (index === 0 && x === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 1 && x === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 2 && y === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 3 && y === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 4 && z === 1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    if (index === 5 && z === -1) {
+      faceColor = color;
+      isExterior = true;
+    }
+    return new THREE.MeshPhongMaterial({
+      color: faceColor,
+      emissive: isExterior ? 0x000000 : 0x000000,
+      emissiveIntensity: 0,
+    });
   });
   const cap = new THREE.Mesh(capGeo, materials);
 

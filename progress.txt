@@ -1,3 +1,25 @@
+## 2026-01-13 - Fix Cube Colors
+
+**Problem:**
+- Cube faces had 70% opacity, making colors washed out
+- Black squares visible on cube faces (internal faces showing through)
+
+**Solution:**
+- Removed `transparent: true, opacity: 0.7` from all materials
+- Changed internal face color to black (matches background)
+- Restructured material creation for clarity
+
+**Testing:**
+- Browser verified: colors now solid and vibrant
+- Browser verified: no black squares visible
+- All lints + tests passing (56/56)
+
+**Files Modified:**
+- src/lib/rubiks-cube.ts:10,32-64,67-99,120-152
+- tasks.yaml:94-105
+
+---
+
 ## 2026-01-13 - Shuffle Cube Feature
 
 **Implemented:**
