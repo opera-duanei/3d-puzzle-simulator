@@ -62,6 +62,7 @@ export function createCornerPiece(x: number, y: number, z: number): THREE.Group 
       emissiveIntensity: 0,
       transparent: !isExterior,
       opacity: isExterior ? 1 : 0,
+      side: THREE.FrontSide,
     });
   });
   const mainCube = new THREE.Mesh(mainGeo, materials);
@@ -117,6 +118,7 @@ export function createEdgePiece(x: number, y: number, z: number): THREE.Group {
       emissiveIntensity: 0,
       transparent: !isExterior,
       opacity: isExterior ? 1 : 0,
+      side: THREE.FrontSide,
     });
   });
   const mainCube = new THREE.Mesh(mainGeo, materials);
@@ -190,6 +192,7 @@ export function createCenterPiece(x: number, y: number, z: number): THREE.Group 
       emissiveIntensity: 0,
       transparent: !isExterior,
       opacity: isExterior ? 1 : 0,
+      side: THREE.FrontSide,
     });
   });
   const cap = new THREE.Mesh(capGeo, materials);
