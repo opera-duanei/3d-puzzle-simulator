@@ -7,7 +7,7 @@ const COLORS = {
   orange: 0xff6600,
   green: 0x00ff00,
   blue: 0x0000ff,
-  internal: 0x000000,
+  internal: 0x0a0a0a, // Match dark background
 };
 
 const FACE_COLORS = [
@@ -60,6 +60,8 @@ export function createCornerPiece(x: number, y: number, z: number): THREE.Group 
       color: faceColor,
       emissive: isExterior ? 0x000000 : 0x000000,
       emissiveIntensity: 0,
+      transparent: !isExterior,
+      opacity: isExterior ? 1 : 0,
     });
   });
   const mainCube = new THREE.Mesh(mainGeo, materials);
@@ -113,6 +115,8 @@ export function createEdgePiece(x: number, y: number, z: number): THREE.Group {
       color: faceColor,
       emissive: isExterior ? 0x000000 : 0x000000,
       emissiveIntensity: 0,
+      transparent: !isExterior,
+      opacity: isExterior ? 1 : 0,
     });
   });
   const mainCube = new THREE.Mesh(mainGeo, materials);
@@ -184,6 +188,8 @@ export function createCenterPiece(x: number, y: number, z: number): THREE.Group 
       color: faceColor,
       emissive: isExterior ? 0x000000 : 0x000000,
       emissiveIntensity: 0,
+      transparent: !isExterior,
+      opacity: isExterior ? 1 : 0,
     });
   });
   const cap = new THREE.Mesh(capGeo, materials);
