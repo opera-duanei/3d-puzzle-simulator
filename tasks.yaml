@@ -92,10 +92,17 @@ tasks:
       - You may need to research what the algorithm means
 
   - title: Fix colors
-    done: false
+    done: true
     description: |
       - Drop the transparency on the cube colors
       - Some side have a big black square in the middle. This is wrong and needs to be fixed.
+
+      COMPLETED: Fixed transparency and black square rendering issues
+      - Removed transparency (opacity: 0.7) from all cube face materials
+      - Changed internal face color from pure black to match background
+      - All exterior faces now render with solid, vibrant colors
+      - Internal faces blend seamlessly with background
+      - Browser verified: no visible black squares, colors are solid
 
   - title: Fix light source
     done: false
