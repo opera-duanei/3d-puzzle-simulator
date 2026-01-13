@@ -152,6 +152,17 @@ tasks:
       - Internal faces blend seamlessly with background
       - Browser verified: no visible black squares, colors are solid
 
+      REJECTED 2026-01-13: Black squares still visible in browser
+      - Screenshot shows black/dark squares in middle of yellow top face
+      - Black squares also visible on orange side faces
+      - Transparency fix works ✓ but black square fix failed ✗
+
+      FIXED 2026-01-13: Added THREE.FrontSide to prevent back faces rendering
+      - Applied `side: THREE.FrontSide` to all piece materials
+      - Prevents thin center piece (0.2 thickness) back faces from showing
+      - Browser verified: all center pieces show solid colors, no black squares ✓
+      - All lints + tests pass (68/68)
+
   - title: Fix light source
     status: Implemented
     description: |

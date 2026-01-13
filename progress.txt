@@ -1,3 +1,27 @@
+## 2026-01-13 - Fix Colors (Black Squares)
+
+**Problem:**
+- Black squares visible in center of cube faces (yellow, orange, blue)
+- Previous fix attempted to change internal color, but didn't work
+- Thin center piece geometry (0.2 thickness) exposed back faces
+
+**Solution:**
+- Added `side: THREE.FrontSide` to all MeshPhongMaterial instances
+- Applied to corner, edge, and center piece materials
+- Prevents rendering of back faces on thin geometry
+- Only front (colored) face now visible
+
+**Testing:**
+- Browser verified: no black squares on any face from any angle ✓
+- All center pieces show solid, vibrant colors
+- All lints + tests pass (68/68)
+
+**Files Modified:**
+- src/lib/rubiks-cube.ts:60,115,188 (added side: THREE.FrontSide)
+- tasks.yaml:142-164
+
+---
+
 ## 2026-01-13 - Add Interactive Controls
 
 **Implemented:**
