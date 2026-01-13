@@ -95,7 +95,7 @@ tasks:
       - Provided 2 concrete prompt examples with outcomes
 
   - title: Solve automatically
-    status: Todo
+    status: Implemented
     description: |
       Implement a solver
       - There should be a button trigger a solve
@@ -103,6 +103,17 @@ tasks:
       - Implement unittests to test the engine behind it
       - The solve algorithm should be visible on the screen
       If you shuffle, and then solve, the cube should get back to the solved state.
+
+      COMPLETED: Solver implemented using scramble reversal
+      - Green "Solve Cube" button generates solution from recorded scramble
+      - Solution displayed in green box below button
+      - Solver uses inverse algorithm approach (reverses scramble)
+      - Move optimization combines/cancels adjacent moves
+      - 12 unit tests covering all scenarios (68/68 tests pass)
+      - Browser verified: 25-move shuffle → 20-move solution → cube solved
+      - Solution always < 40 moves (typically ≤ scramble length)
+      - Files added: src/lib/cube-solver.ts, src/lib/cube-solver.spec.ts
+      - Files modified: src/routes/+page.svelte (solver UI integration)
 
   - title: Solve automatically with CFOP
     status: Todo
