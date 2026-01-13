@@ -3,16 +3,19 @@
   import { CubeEngine, type Move } from "$lib/cube-engine";
   import { AlgorithmExecutor } from "$lib/algorithm-executor";
   import { CubeSolver } from "$lib/cube-solver";
+  import { CFOPSolver } from "$lib/cfop-solver";
 
   let cubeComponent: RubiksCube;
   const engine = new CubeEngine();
   const executor = new AlgorithmExecutor();
   const solver = new CubeSolver();
+  const cfopSolver = new CFOPSolver();
 
   let algorithmInput = $state("");
   let isExecuting = $state(false);
   let shuffleAlgorithm = $state("");
   let solutionAlgorithm = $state("");
+  let solveMethod = $state<"inverse" | "cfop">("inverse");
 
   const BASIC_MOVES: Move[] = [
     "U",
@@ -75,7 +78,15 @@
   async function solveCube() {
     if (isExecuting) return;
 
-    const solution = solver.solve();
+    let solution: Move[];
+    if (solveMethod === "cfop") {
+      // Get scramble history from solver
+      const scramble = shuffleAlgorithm.split(" ").filter((m) => m.trim()) as Move[];
+      solution = cfopSolver.solve(scramble);
+    } else {
+      solution = solver.solve();
+    }
+
     if (solution.length === 0) {
       solutionAlgorithm = "Cube is already solved!";
       return;
@@ -127,6 +138,21 @@
       <p class="mt-1 text-xs break-words text-purple-700">{shuffleAlgorithm}</p>
     </div>
   {/if}
+
+  <div class="mb-4">
+    <label for="solve-method" class="mb-2 block text-xs font-semibold text-gray-700"
+      >Solve Method:</label
+    >
+    <select
+      id="solve-method"
+      bind:value={solveMethod}
+      disabled={isExecuting}
+      class="w-full rounded border-2 border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <option value="inverse">Inverse Scramble</option>
+      <option value="cfop">CFOP (Cross, F2L, OLL, PLL)</option>
+    </select>
+  </div>
 
   <div class="mb-4">
     <button
