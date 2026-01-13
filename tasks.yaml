@@ -105,8 +105,14 @@ tasks:
       - Browser verified: no visible black squares, colors are solid
 
   - title: Fix light source
-    done: false
+    done: true
     description: |
       Something seems to be wrong with then light source.
       It looks like the camera is moving, because one side of the cube is darker than the other.
       When we rotate the cube, we want the cube to rotate, not the camera. We want the light to have a consistent direction, independently of the cube rotation.
+
+      COMPLETED: Fixed lighting to maintain consistent direction
+      - Attached DirectionalLight to camera instead of scene
+      - Added camera to scene (required for child lights to work)
+      - Light now moves with viewer, maintaining consistent illumination
+      - Browser verified: all cube faces evenly lit during rotation

@@ -210,10 +210,11 @@
 
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(5, 5, 5);
-    scene.add(light);
+    camera.add(light);
 
     const ambientLight = new THREE.AmbientLight(0x404040, 2);
     scene.add(ambientLight);
+    scene.add(camera);
 
     createRubiksCube();
 
