@@ -17,6 +17,10 @@ tasks:
       Previiously we impemented support for more notations.
       However, it seems like none of the new notations work in the text input.
       We need to properly test this manually and make sure it truly works
+      Step to reproduce:
+      1. Add 'R2 U2 F2 M2 E2 S2' to text input
+      2. Click "Execute
+      3. See nothing happening
 
   - title: Add gizmo
     done: false
