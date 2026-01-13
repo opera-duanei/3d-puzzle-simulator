@@ -5,6 +5,7 @@
   import { createCubePiece, createCore, type Piece } from "$lib/rubiks-cube";
   import { CubeEngine, type Move } from "$lib/cube-engine";
   import { AlgorithmExecutor } from "$lib/algorithm-executor";
+  import { getMoveActions } from "$lib/move-handler";
 
   let canvas: HTMLCanvasElement;
   let scene: THREE.Scene;
@@ -187,61 +188,13 @@
   export async function executeMove(move: Move): Promise<void> {
     engine.executeMove(move);
 
-    switch (move) {
-      case "U":
-        await rotateLayer("y", 1, true);
-        break;
-      case "U'":
-        await rotateLayer("y", 1, false);
-        break;
-      case "D":
-        await rotateLayer("y", -1, false);
-        break;
-      case "D'":
-        await rotateLayer("y", -1, true);
-        break;
-      case "L":
-        await rotateLayer("x", -1, false);
-        break;
-      case "L'":
-        await rotateLayer("x", -1, true);
-        break;
-      case "R":
-        await rotateLayer("x", 1, true);
-        break;
-      case "R'":
-        await rotateLayer("x", 1, false);
-        break;
-      case "F":
-        await rotateLayer("z", 1, true);
-        break;
-      case "F'":
-        await rotateLayer("z", 1, false);
-        break;
-      case "B":
-        await rotateLayer("z", -1, false);
-        break;
-      case "B'":
-        await rotateLayer("z", -1, true);
-        break;
-      case "x":
-        await rotateCube("x", true);
-        break;
-      case "x'":
-        await rotateCube("x", false);
-        break;
-      case "y":
-        await rotateCube("y", true);
-        break;
-      case "y'":
-        await rotateCube("y", false);
-        break;
-      case "z":
-        await rotateCube("z", true);
-        break;
-      case "z'":
-        await rotateCube("z", false);
-        break;
+    const actions = getMoveActions(move);
+    for (const action of actions) {
+      if ("type" in action) {
+        await rotateCube(action.axis, action.clockwise);
+      } else {
+        await rotateLayer(action.axis, action.value, action.clockwise);
+      }
     }
   }
 
