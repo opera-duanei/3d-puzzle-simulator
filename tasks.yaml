@@ -12,7 +12,7 @@ tasks:
       - Comprehensive test suite added: 54 unit tests covering all notations
 
   - title: Support all possible actions broken as shit
-    status: Implemented
+    status: Accepted
     description: |
       Previously we impemented support for more notations.
       However, it seems like none of the new notations work in the text input.
@@ -28,7 +28,7 @@ tasks:
       - Browser verified: R2 U2 F2 M2 E2 S2 executes correctly
 
   - title: Add gizmo
-    status: Implemented
+    status: Accepted
     description: |
       When rotating the cube, we want to show a gizmo.
       - Show a gizmo that is always synced with the cube orientation
@@ -40,7 +40,7 @@ tasks:
       - Browser verified: x2 y2 rotates gizmo correctly
 
   - title: Add interactive controls.
-    status: Implemented
+    status: Accepted
     description: |
       It should be possible to rotate cube layers by click and dragging the cube.
       - Click and dragging should rotate the clicked layers
@@ -59,7 +59,7 @@ tasks:
       - Browser verified: drag gestures execute correct moves
 
   - title: Shuffle cube
-    status: Implemented
+    status: Accepted
     description: |
       It should be possible to shuffle the cube
       - Shuffle algorithm should be visible on the screen
@@ -140,7 +140,7 @@ tasks:
       If you shuffle, and then solve, the cube should get back to the solved state.
 
   - title: Fix colors
-    status: Implemented
+    status: Accepted
     description: |
       - Drop the transparency on the cube colors
       - Some side have a big black square in the middle. This is wrong and needs to be fixed.
