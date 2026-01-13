@@ -1,0 +1,12 @@
+tasks:
+  - done: false
+    title: Support all possible actions
+    description: |
+      Some notations a currently missing. We need to support all possible moves
+      - The basic moves are Up (U), Down (D), Right (R), Left (L), Front (F), Back (B).
+      - An apostrophe (pronounced as prime) means to turn the face in the opposite direction (counterclockwise). (U' D' R' L' F' B')
+      - The number 2 means to turn that face twice (U2 D2 R2 L2 F2 B2)
+      - Wide moves turn 2 layers at once, for example left layer and the middle layer together. They can be written in 2 ways: (Lower case: u, d, r, l, f, b) or (Ending in w: Uw, Dw, Rw, Lw, Fw, Bw)
+      - Slice moves are written as M, E, S. Slice moves only turn the middle layer. M follows the L direction, E follows the D direction, S follows the F direction.
+      - There is also M' and M2, etc.
+      - x follows the R direction, y follows the U direction, z follows the F direction.
