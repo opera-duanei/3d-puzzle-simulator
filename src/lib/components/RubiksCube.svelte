@@ -15,9 +15,19 @@
   let pieces: Piece[] = [];
   let isAnimating = false;
   let animationQueue: (() => void)[] = [];
+  let gizmo: THREE.Group;
 
   export let engine: CubeEngine = new CubeEngine();
   export const executor: AlgorithmExecutor = new AlgorithmExecutor();
+
+  function createGizmo() {
+    gizmo = new THREE.Group();
+
+    const axesHelper = new THREE.AxesHelper(2.5);
+    gizmo.add(axesHelper);
+
+    scene.add(gizmo);
+  }
 
   function createRubiksCube() {
     pieces = [];
@@ -132,6 +142,9 @@
         pivot.add(piece.mesh);
       });
 
+      scene.remove(gizmo);
+      pivot.add(gizmo);
+
       const duration = 300;
       const startTime = performance.now();
 
@@ -168,6 +181,14 @@
             piece.position.y = Math.round(worldPos.y);
             piece.position.z = Math.round(worldPos.z);
           });
+
+          const gizmoWorldQuat = new THREE.Quaternion();
+          gizmo.getWorldQuaternion(gizmoWorldQuat);
+
+          pivot.remove(gizmo);
+          scene.add(gizmo);
+
+          gizmo.quaternion.copy(gizmoWorldQuat);
 
           scene.remove(pivot);
           isAnimating = false;
@@ -216,6 +237,7 @@
     scene.add(ambientLight);
     scene.add(camera);
 
+    createGizmo();
     createRubiksCube();
 
     camera.position.set(5, 5, 5);

@@ -28,10 +28,16 @@ tasks:
       - Browser verified: R2 U2 F2 M2 E2 S2 executes correctly
 
   - title: Add gizmo
-    done: false
+    done: true
     description: |
       When rotating the cube, we want to show a gizmo.
       - Show a gizmo that is always synced with the cube orientation
+
+      COMPLETED: Gizmo synchronized with cube orientation
+      - Added Three.js AxesHelper (RGB axes: X=red, Y=green, Z=blue)
+      - Gizmo rotates with cube during rotation moves (x, y, z)
+      - Quaternion-based orientation tracking maintains sync
+      - Browser verified: x2 y2 rotates gizmo correctly
 
   - title: Add interactive controls.
     done: false
