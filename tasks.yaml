@@ -95,7 +95,7 @@ tasks:
       - Provided 2 concrete prompt examples with outcomes
 
   - title: Solve automatically
-    status: Implemented
+    status: Accepted
     description: |
       Implement a solver
       - There should be a button trigger a solve
