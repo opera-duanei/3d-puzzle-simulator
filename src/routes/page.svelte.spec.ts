@@ -7,7 +7,7 @@ describe("/+page.svelte", () => {
   it("should render Algorithm Executor heading", async () => {
     render(Page);
 
-    const heading = page.getByRole("heading", { level: 3 });
+    const heading = page.getByRole("heading", { level: 1 });
     await expect.element(heading).toBeInTheDocument();
     await expect.element(heading).toHaveTextContent("Algorithm Executor");
   });

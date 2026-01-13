@@ -33,7 +33,7 @@
 <RubiksCube bind:this={cubeComponent} {engine} {executor} />
 
 <div class="fixed top-5 left-5 max-w-md rounded-lg bg-white/90 p-5 shadow-lg">
-  <h3 class="mb-3 text-lg font-semibold text-gray-800">Algorithm Executor</h3>
+  <h1 class="mb-3 text-lg font-semibold text-gray-800">Algorithm Executor</h1>
 
   <div class="mb-4">
     <input

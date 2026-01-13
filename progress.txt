@@ -1,3 +1,30 @@
+## 2026-01-13 - Fix Notation Input Bug
+
+**Problem:**
+- Text input wasn't executing R2, U2, F2, M2, E2, S2 despite engine support
+- RubiksCube.svelte executeMove() only handled basic moves + rotations
+- Missing implementations for double moves, wide moves, slice moves
+
+**Solution:**
+- Created move-handler.ts module with getMoveActions() helper
+- Maps all 69 Move types to animation sequences
+- Refactored RubiksCube.svelte to use new module (reduced from 505→260 lines)
+- Changed h3→h1 for proper semantic HTML
+
+**Testing:**
+- Browser verified: R2 U2 F2 M2 E2 S2 executes correctly
+- Browser verified: Rw U Rw' U' (wide moves) work
+- All lints + tests passing (56/56)
+
+**Files Modified:**
+- src/lib/move-handler.ts (new, 280 lines)
+- src/lib/components/RubiksCube.svelte:1-260 (refactored)
+- src/routes/+page.svelte:36 (h3→h1)
+- src/routes/page.svelte.spec.ts:10 (level 3→1)
+- tasks.yaml:14-24
+
+---
+
 ## 2026-01-13 - Complete Rubik's Cube Notation Support
 
 **Implemented:**
