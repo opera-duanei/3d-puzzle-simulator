@@ -82,19 +82,16 @@
   async function solveCube() {
     if (isExecuting) return;
 
+    // Get full move history (includes shuffle + manual moves)
+    const history = solver.getHistory();
+
     let solution: Move[];
     if (solveMethod === "cfop") {
-      // Get scramble history from solver
-      const scramble = shuffleAlgorithm.split(" ").filter((m) => m.trim()) as Move[];
-      solution = cfopSolver.solve(scramble);
+      solution = cfopSolver.solve(history);
     } else if (solveMethod === "roux") {
-      // Get scramble history from solver
-      const scramble = shuffleAlgorithm.split(" ").filter((m) => m.trim()) as Move[];
-      solution = rouxSolver.solve(scramble);
+      solution = rouxSolver.solve(history);
     } else if (solveMethod === "zz") {
-      // Get scramble history from solver
-      const scramble = shuffleAlgorithm.split(" ").filter((m) => m.trim()) as Move[];
-      solution = zzSolver.solve(scramble);
+      solution = zzSolver.solve(history);
     } else {
       solution = solver.solve();
     }
