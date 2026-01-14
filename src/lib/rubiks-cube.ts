@@ -157,8 +157,8 @@ export function createEdgePiece(x: number, y: number, z: number): THREE.Group {
 export function createCenterPiece(x: number, y: number, z: number): THREE.Group {
   const group = new THREE.Group();
 
-  const capSize = 0.95;
-  const capGeo = new THREE.BoxGeometry(capSize, capSize, 0.2);
+  const mainSize = 0.95;
+  const mainGeo = new THREE.BoxGeometry(mainSize, mainSize, mainSize);
   const materials = FACE_COLORS.map((color, index) => {
     let faceColor = COLORS.internal;
     let isExterior = false;
@@ -195,13 +195,8 @@ export function createCenterPiece(x: number, y: number, z: number): THREE.Group 
       side: THREE.FrontSide,
     });
   });
-  const cap = new THREE.Mesh(capGeo, materials);
-
-  if (x !== 0) cap.rotation.y = Math.PI / 2;
-  if (y !== 0) cap.rotation.x = Math.PI / 2;
-
-  cap.position.set(x * 0.4, y * 0.4, z * 0.4);
-  group.add(cap);
+  const mainCube = new THREE.Mesh(mainGeo, materials);
+  group.add(mainCube);
 
   return group;
 }
