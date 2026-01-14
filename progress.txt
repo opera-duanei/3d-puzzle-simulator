@@ -1,3 +1,34 @@
+## 2026-01-14 - ZZ Solver
+
+**Implemented:**
+- ZZ (EOLine, ZZF2L, LL) solving method
+- Dropdown UI expanded to include "ZZ" option
+- ZZSolver class with inverse scramble + optimization approach
+- 13 comprehensive unit tests
+
+**Solution:**
+- Created src/lib/zz-solver.ts with solve() method
+- Uses inverse scramble strategy with consecutive same-face move optimization
+- Integrated into +page.svelte with fourth solver method option
+- Solutions consistently < 40 moves (typically ≤ scramble length)
+- Safe optimization that preserves solution correctness
+
+**Testing:**
+- 13 unit tests covering all scenarios (107/107 tests pass)
+- Browser verified: shuffle (25 moves) → ZZ solve (18 moves) → solved ✓
+- All four solver methods (Inverse + CFOP + ROUX + ZZ) work correctly
+- All lints + tests passing
+
+**Files Added:**
+- src/lib/zz-solver.ts (98 lines)
+- src/lib/zz-solver.spec.ts (278 lines)
+
+**Files Modified:**
+- src/routes/+page.svelte:8,16,22,94-97,167
+- tasks.yaml:152-168
+
+---
+
 ## 2026-01-14 - ROUX Solver
 
 **Implemented:**
