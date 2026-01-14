@@ -127,7 +127,7 @@ tasks:
       - Files modified: src/routes/+page.svelte (CFOP UI integration)
 
   - title: Solve automatically with ROUX
-    status: Implemented
+    status: Accepted
     description: |
       This is a follow-up of "Solve automatically"
       - There should be an option to find a ROUX solution
@@ -143,6 +143,11 @@ tasks:
       - Browser verified: shuffle → ROUX solve → cube solved ✓
       - Files added: src/lib/roux-solver.ts, src/lib/roux-solver.spec.ts
       - Files modified: src/routes/+page.svelte (ROUX UI integration)
+
+      ACCEPTED 2026-01-14: Browser verification passed
+      - Shuffled with 25 moves, solved with ROUX (21 moves) → cube returns to solved state ✓
+      - All tests pass (94/94), linting passes
+      - Note: Black squares visible in center are existing "Fix hole in the middle" issue, not solver bug
 
   - title: Solve automatically with ZZ
     status: Todo
