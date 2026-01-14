@@ -293,35 +293,49 @@
       const pos = clickedFace!.piece.position;
       const threshold = dragDistance > 50 || velocity > 0.3 ? 0.3 : 0.7;
 
+      // Front/Back face (z-normal): looking at front (+z) or back (-z)
       if (Math.abs(worldNormal.z) > threshold) {
+        const isFront = worldNormal.z > 0;
         if (isHorizontal) {
-          if (pos.y === 1) return deltaX > 0 ? "U'" : "U";
-          if (pos.y === -1) return deltaX > 0 ? "D" : "D'";
-          if (pos.y === 0) return deltaX > 0 ? "E" : "E'";
+          // Horizontal drag on front/back face → U/D/E layers
+          if (pos.y === 1) return deltaX > 0 === isFront ? "U'" : "U";
+          if (pos.y === -1) return deltaX > 0 === isFront ? "D" : "D'";
+          if (pos.y === 0) return deltaX > 0 === isFront ? "E" : "E'";
         } else {
-          if (pos.x === 1) return deltaY > 0 ? "R'" : "R";
-          if (pos.x === -1) return deltaY > 0 ? "L" : "L'";
-          if (pos.x === 0) return deltaY > 0 ? "M'" : "M";
+          // Vertical drag on front/back face → R/L/M layers
+          if (pos.x === 1) return deltaY > 0 !== isFront ? "R'" : "R";
+          if (pos.x === -1) return deltaY > 0 !== isFront ? "L" : "L'";
+          if (pos.x === 0) return deltaY > 0 !== isFront ? "M'" : "M";
         }
-      } else if (Math.abs(worldNormal.y) > threshold) {
+      }
+      // Top/Bottom face (y-normal): looking at top (+y) or bottom (-y)
+      else if (Math.abs(worldNormal.y) > threshold) {
+        const isTop = worldNormal.y > 0;
         if (isHorizontal) {
-          if (pos.z === 1) return deltaX > 0 ? "F'" : "F";
-          if (pos.z === -1) return deltaX > 0 ? "B" : "B'";
-          if (pos.z === 0) return deltaX > 0 ? "S'" : "S";
+          // Horizontal drag on top/bottom face → F/B/S layers
+          if (pos.z === 1) return deltaX > 0 === isTop ? "F'" : "F";
+          if (pos.z === -1) return deltaX > 0 === isTop ? "B" : "B'";
+          if (pos.z === 0) return deltaX > 0 === isTop ? "S'" : "S";
         } else {
-          if (pos.x === 1) return deltaY > 0 ? "R'" : "R";
-          if (pos.x === -1) return deltaY > 0 ? "L" : "L'";
-          if (pos.x === 0) return deltaY > 0 ? "M'" : "M";
+          // Vertical drag on top/bottom face → R/L/M layers
+          if (pos.x === 1) return deltaY > 0 === isTop ? "R'" : "R";
+          if (pos.x === -1) return deltaY > 0 === isTop ? "L" : "L'";
+          if (pos.x === 0) return deltaY > 0 === isTop ? "M'" : "M";
         }
-      } else if (Math.abs(worldNormal.x) > threshold) {
+      }
+      // Right/Left face (x-normal): looking at right (+x) or left (-x)
+      else if (Math.abs(worldNormal.x) > threshold) {
+        const isRight = worldNormal.x > 0;
         if (isHorizontal) {
-          if (pos.y === 1) return deltaX > 0 ? "U'" : "U";
-          if (pos.y === -1) return deltaX > 0 ? "D" : "D'";
-          if (pos.y === 0) return deltaX > 0 ? "E" : "E'";
+          // Horizontal drag on right/left face → U/D/E layers
+          if (pos.y === 1) return deltaX > 0 !== isRight ? "U'" : "U";
+          if (pos.y === -1) return deltaX > 0 !== isRight ? "D" : "D'";
+          if (pos.y === 0) return deltaX > 0 !== isRight ? "E" : "E'";
         } else {
-          if (pos.z === 1) return deltaY > 0 ? "F" : "F'";
-          if (pos.z === -1) return deltaY > 0 ? "B'" : "B";
-          if (pos.z === 0) return deltaY > 0 ? "S" : "S'";
+          // Vertical drag on right/left face → F/B/S layers
+          if (pos.z === 1) return deltaY > 0 !== isRight ? "F" : "F'";
+          if (pos.z === -1) return deltaY > 0 !== isRight ? "B'" : "B";
+          if (pos.z === 0) return deltaY > 0 !== isRight ? "S" : "S'";
         }
       }
       return null;

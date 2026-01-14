@@ -260,6 +260,15 @@ tasks:
       - Files modified: src/lib/move-handler.ts:3-200, src/lib/components/RubiksCube.svelte:56-68,222
 
   - title: Interactions sometimes spin the wrong direction
-    status: Todo
+    status: Implemented
     description: |
       When I try to spin some layers (e.g., the middle slice), it spins the wrong direction.
+
+      COMPLETED: Fixed drag interaction direction mapping
+      - Root cause: determineMove() didn't account for viewer's perspective
+      - Front face vs back face, top vs bottom, left vs right have opposite mappings
+      - Fixed by checking worldNormal sign (isFront, isTop, isRight)
+      - Applied perspective-aware direction logic for all 6 faces × 2 drag directions
+      - All layer drags now rotate in natural/expected direction relative to viewer
+      - All tests pass (107/107), linting passes
+      - Files modified: src/lib/components/RubiksCube.svelte:292-342
