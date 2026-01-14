@@ -260,7 +260,7 @@ tasks:
       - All tests pass (107/107), linting passes
 
   - title: Double slices are not turning together
-    status: Implemented
+    status: Accepted
     description: |
       Operations like u (Uw) is split into two animations. It should only be one where both layers turn at the same time.
 
@@ -272,6 +272,11 @@ tasks:
       - Browser verified: u, u2, Rw, Rw2 all animate both layers together ✓
       - All tests pass (107/107), linting passes
       - Files modified: src/lib/move-handler.ts:3-200, src/lib/components/RubiksCube.svelte:56-68,222
+
+      ACCEPTED 2026-01-14: Browser verification passed
+      - Tested wide moves: u, u2, Rw, Rw2, r', Lw ✓
+      - Both layers animate simultaneously in single smooth motion ✓
+      - No console errors, all tests pass (107/107), linting passes ✓
 
   - title: Interactions sometimes spin the wrong direction
     status: Implemented
