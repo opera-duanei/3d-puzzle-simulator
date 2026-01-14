@@ -4,18 +4,20 @@
   import { AlgorithmExecutor } from "$lib/algorithm-executor";
   import { CubeSolver } from "$lib/cube-solver";
   import { CFOPSolver } from "$lib/cfop-solver";
+  import { RouxSolver } from "$lib/roux-solver";
 
   let cubeComponent: RubiksCube;
   const engine = new CubeEngine();
   const executor = new AlgorithmExecutor();
   const solver = new CubeSolver();
   const cfopSolver = new CFOPSolver();
+  const rouxSolver = new RouxSolver();
 
   let algorithmInput = $state("");
   let isExecuting = $state(false);
   let shuffleAlgorithm = $state("");
   let solutionAlgorithm = $state("");
-  let solveMethod = $state<"inverse" | "cfop">("inverse");
+  let solveMethod = $state<"inverse" | "cfop" | "roux">("inverse");
 
   const BASIC_MOVES: Move[] = [
     "U",
@@ -83,6 +85,10 @@
       // Get scramble history from solver
       const scramble = shuffleAlgorithm.split(" ").filter((m) => m.trim()) as Move[];
       solution = cfopSolver.solve(scramble);
+    } else if (solveMethod === "roux") {
+      // Get scramble history from solver
+      const scramble = shuffleAlgorithm.split(" ").filter((m) => m.trim()) as Move[];
+      solution = rouxSolver.solve(scramble);
     } else {
       solution = solver.solve();
     }
@@ -151,6 +157,7 @@
     >
       <option value="inverse">Inverse Scramble</option>
       <option value="cfop">CFOP (Cross, F2L, OLL, PLL)</option>
+      <option value="roux">ROUX (First Block, Second Block, CMLL, LSE)</option>
     </select>
   </div>
 

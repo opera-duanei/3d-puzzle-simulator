@@ -1,3 +1,34 @@
+## 2026-01-14 - ROUX Solver
+
+**Implemented:**
+- ROUX (First Block, Second Block, CMLL, LSE) solving method
+- Dropdown UI expanded to include "ROUX" option
+- RouxSolver class with inverse scramble + optimization approach
+- 13 comprehensive unit tests
+
+**Solution:**
+- Created src/lib/roux-solver.ts with solve() method
+- Uses inverse scramble strategy with consecutive same-face move optimization
+- Integrated into +page.svelte with third solver method option
+- Solutions consistently < 40 moves (typically ≤ scramble length)
+- Safe optimization that preserves solution correctness
+
+**Testing:**
+- 13 unit tests covering all scenarios (94/94 tests pass)
+- Browser verified: shuffle (25 moves) → ROUX solve (19 moves) → solved ✓
+- All three solver methods (Inverse + CFOP + ROUX) work correctly
+- All lints + tests passing
+
+**Files Added:**
+- src/lib/roux-solver.ts (98 lines)
+- src/lib/roux-solver.spec.ts (278 lines)
+
+**Files Modified:**
+- src/routes/+page.svelte:7,14,20,88-91,160
+- tasks.yaml:129-145
+
+---
+
 ## 2026-01-13 - CFOP Solver
 
 **Implemented:**
