@@ -228,13 +228,22 @@ tasks:
       - No holes visible from any angle ✓
 
   - title: The cube solver doesn't work if you change something
-    status: Todo
+    status: Implemented
     description: |
       Steps:
       1. Shuffle cube
       2. Execute any changes on the cube
       3. Click solve
       4. Observe how cube is not solved
+
+      COMPLETED: Solver now tracks full move history including manual changes
+      - Root cause: CFOP/ROUX/ZZ solvers only used shuffleAlgorithm string, ignoring manual moves
+      - Fix: Added getHistory() method to CubeSolver to expose recorded move history
+      - All solver methods (inverse/CFOP/ROUX/ZZ) now use solver.getHistory() instead of parsing shuffleAlgorithm
+      - Browser verified: shuffle (25 moves) → manual R U → solve → cube solved ✓
+      - Solution correctly starts with "U' R'" (inverse of manual moves) ✓
+      - All tests pass (107/107), linting passes
+      - Files modified: src/lib/cube-solver.ts:24-30 (getHistory), src/routes/+page.svelte:82-97 (use history)
 
   - title: Double slices are not turning together
     status: Todo

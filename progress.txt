@@ -1,3 +1,29 @@
+## 2026-01-14 - Fix Solver Manual Moves Bug
+
+**Problem:**
+- Solver ignored manual moves executed after shuffle
+- Steps: shuffle → manual "R U" → solve → cube NOT solved
+- Root cause: CFOP/ROUX/ZZ solvers only parsed `shuffleAlgorithm` string
+- Inverse solver worked because it used `solver.solve()` with full recorded history
+
+**Solution:**
+- Added `getHistory()` method to CubeSolver class
+- Returns copy of full recorded move history (shuffle + manual moves)
+- Updated all solver methods to use `solver.getHistory()` instead of parsing `shuffleAlgorithm`
+- All solvers now track complete move history consistently
+
+**Testing:**
+- Browser verified: shuffle (25 moves) → manual R U → solve → cube solved ✓
+- Solution correctly starts with "U' R'" (inverse of R U) ✓
+- All tests pass (107/107), linting passes
+
+**Files Modified:**
+- src/lib/cube-solver.ts:24-30 (added getHistory method)
+- src/routes/+page.svelte:82-97 (use history for all solvers)
+- tasks.yaml:230-246
+
+---
+
 ## 2026-01-14 - Fix Hole in the Middle
 
 **Problem:**

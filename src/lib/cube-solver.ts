@@ -22,6 +22,14 @@ export class CubeSolver {
   }
 
   /**
+   * Gets the recorded scramble history
+   * @returns Copy of scramble history
+   */
+  getHistory(): Move[] {
+    return this.scrambleHistory.slice();
+  }
+
+  /**
    * Solves the cube by reversing recorded scramble
    * @returns Array of moves to solve the cube
    */
