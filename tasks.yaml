@@ -235,7 +235,7 @@ tasks:
       - No holes visible from any angle ✓
 
   - title: The cube solver doesn't work if you change something
-    status: Implemented
+    status: Accepted
     description: |
       Steps:
       1. Shuffle cube
@@ -251,6 +251,13 @@ tasks:
       - Solution correctly starts with "U' R'" (inverse of manual moves) ✓
       - All tests pass (107/107), linting passes
       - Files modified: src/lib/cube-solver.ts:24-30 (getHistory), src/routes/+page.svelte:82-97 (use history)
+
+      ACCEPTED 2026-01-14: Browser verification passed
+      - Test 1 (Inverse): shuffle → manual "R U" → solve → cube solved ✓
+      - Test 2 (CFOP): shuffle → manual "F D" → solve → cube solved ✓
+      - Solutions correctly start with inverse of manual moves ✓
+      - All solver methods work with manual changes ✓
+      - All tests pass (107/107), linting passes
 
   - title: Double slices are not turning together
     status: Implemented
