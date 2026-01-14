@@ -210,7 +210,7 @@ tasks:
       - Browser verified: all cube faces evenly lit during rotation
 
   - title: Fix hole in the middle
-    status: Implemented
+    status: Accepted
     description: |
       Each side of the cube should have 9 "stickers". Some sides seems to just have a big hole in the middle.
 
@@ -221,6 +221,11 @@ tasks:
       - All 6 faces display complete 3x3 grids with visible center stickers
       - Browser verified: all faces show 9 stickers, no holes visible ✓
       - All tests pass (107/107), linting passes
+
+      ACCEPTED 2026-01-14: Browser verification passed
+      - All 6 faces show complete 3x3 grids with solid center stickers ✓
+      - Shuffle test confirms centers move correctly with layers ✓
+      - No holes visible from any angle ✓
 
   - title: The cube solver doesn't work if you change something
     status: Todo
