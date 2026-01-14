@@ -1,3 +1,29 @@
+## 2026-01-14 - Fix Drag Interaction Directions
+
+**Problem:**
+- Drag interactions didn't account for viewer perspective
+- Middle slice (M) and other layers rotated in unexpected/wrong directions
+- Same drag gesture produced different results depending on which face clicked
+
+**Solution:**
+- Refactored determineMove() to extract worldNormal sign (isFront, isTop, isRight)
+- Applied perspective-aware direction mapping for all 6 cube faces
+- Front/back faces: isFront determines horizontal U/D/E and vertical R/L/M mappings
+- Top/bottom faces: isTop determines horizontal F/B/S and vertical R/L/M mappings
+- Left/right faces: isRight determines horizontal U/D/E and vertical F/B/S mappings
+- Each face now has natural drag directions relative to viewer
+
+**Testing:**
+- All tests pass (107/107), linting passes
+- Text input "M" matches expected drag-down behavior
+- Drag directions now intuitive from viewer perspective
+
+**Files Modified:**
+- src/lib/components/RubiksCube.svelte:292-342
+- tasks.yaml:262-274
+
+---
+
 ## 2026-01-14 - Fix Double Slice Animations
 
 **Problem:**
