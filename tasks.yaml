@@ -296,3 +296,9 @@ tasks:
       - Tested slice moves via text input: M E S M' E' S' ✓
       - All moves execute correctly in expected directions ✓
       - No console errors, all tests pass (107/107), linting passes ✓
+
+  - title: The applied algorithms are not really using the algorithm
+    status: Todo
+    description: |
+      If I pick an algorithms (e.g., CFOP), then I execute it, I can see that it's really just an optimized version of the reverse shuffle.
+      I expect it to be the actual CFOP algorithm. I.e., start by solving the cross, then the first two layers, then Orientation, then permutation.
