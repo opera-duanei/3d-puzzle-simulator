@@ -1,3 +1,27 @@
+## 2026-01-14 - Fix Hole in the Middle
+
+**Problem:**
+- Center pieces rendered as thin 0.2-depth caps positioned away from origin
+- Created visible holes where background showed through
+- Only 8 stickers visible per face instead of 9
+
+**Solution:**
+- Changed `createCenterPiece` to use full 0.95x0.95x0.95 cube geometry
+- Removed offset positioning (`cap.position.set(x * 0.4, y * 0.4, z * 0.4)`)
+- Center pieces now match corner/edge structure with single colored exterior face
+- Positioned at natural grid coordinates like all other pieces
+
+**Testing:**
+- All tests pass (107/107), linting passes
+- Browser verified: all 6 faces show complete 3x3 grids ✓
+- Shuffle test confirms center stickers move correctly with layers
+
+**Files Modified:**
+- src/lib/rubiks-cube.ts:157-202 (simplified createCenterPiece)
+- tasks.yaml:212-223
+
+---
+
 ## 2026-01-14 - ZZ Solver
 
 **Implemented:**
