@@ -53,19 +53,19 @@
     }
   }
 
-  function getPiecesInLayer(axis: "x" | "y" | "z", value: number): Piece[] {
-    return pieces.filter((piece) => piece.position[axis] === value);
+  function getPiecesInLayers(axis: "x" | "y" | "z", values: number[]): Piece[] {
+    return pieces.filter((piece) => values.includes(piece.position[axis]));
   }
 
-  function rotateLayer(axis: "x" | "y" | "z", value: number, clockwise: boolean): Promise<void> {
+  function rotateLayer(axis: "x" | "y" | "z", values: number[], clockwise: boolean): Promise<void> {
     return new Promise((resolve) => {
       if (isAnimating) {
-        animationQueue.push(() => rotateLayer(axis, value, clockwise).then(resolve));
+        animationQueue.push(() => rotateLayer(axis, values, clockwise).then(resolve));
         return;
       }
 
       isAnimating = true;
-      const layerPieces = getPiecesInLayer(axis, value);
+      const layerPieces = getPiecesInLayers(axis, values);
       const targetAngle = clockwise ? -Math.PI / 2 : Math.PI / 2;
 
       const pivot = new THREE.Group();
@@ -219,7 +219,7 @@
       if ("type" in action) {
         await rotateCube(action.axis, action.clockwise);
       } else {
-        await rotateLayer(action.axis, action.value, action.clockwise);
+        await rotateLayer(action.axis, action.values, action.clockwise);
       }
     }
   }

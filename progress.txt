@@ -1,3 +1,30 @@
+## 2026-01-14 - Fix Double Slice Animations
+
+**Problem:**
+- Wide moves (u, Uw, Rw, etc.) split into two separate sequential animations
+- Top layer animates, then middle layer animates separately
+- Should animate both layers simultaneously in single smooth motion
+
+**Solution:**
+- Changed LayerRotation type from `value: number` to `values: number[]`
+- Updated getMoveActions() to return multi-layer arrays (u → values: [1, 0])
+- Modified rotateLayer(axis, values[], clockwise) to accept multiple layer values
+- Renamed getPiecesInLayer() to getPiecesInLayers() with values.includes() filter
+- Single THREE.Group pivot now contains pieces from all specified layers
+- All layers rotate together in one animation
+
+**Testing:**
+- All tests pass (107/107), linting passes
+- Browser verified: u, u2, Rw, Rw2 animate both layers simultaneously ✓
+- No console errors, animations smooth and correct
+
+**Files Modified:**
+- src/lib/move-handler.ts:3-200 (LayerRotation type, all move mappings)
+- src/lib/components/RubiksCube.svelte:56-68,222 (multi-layer support)
+- tasks.yaml:248-260
+
+---
+
 ## 2026-01-14 - Fix Solver Manual Moves Bug
 
 **Problem:**
