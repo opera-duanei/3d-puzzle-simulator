@@ -246,9 +246,18 @@ tasks:
       - Files modified: src/lib/cube-solver.ts:24-30 (getHistory), src/routes/+page.svelte:82-97 (use history)
 
   - title: Double slices are not turning together
-    status: Todo
+    status: Implemented
     description: |
       Operations like u (Uw) is split into two animations. It should only be one where both layers turn at the same time.
+
+      COMPLETED: Wide moves now animate both layers simultaneously
+      - Changed LayerRotation type from `value: number` to `values: number[]`
+      - Updated getMoveActions() to return multi-layer arrays (e.g., u → values: [1, 0])
+      - Modified rotateLayer() to accept and animate multiple layers in single pivot
+      - Renamed getPiecesInLayer() to getPiecesInLayers() for clarity
+      - Browser verified: u, u2, Rw, Rw2 all animate both layers together ✓
+      - All tests pass (107/107), linting passes
+      - Files modified: src/lib/move-handler.ts:3-200, src/lib/components/RubiksCube.svelte:56-68,222
 
   - title: Interactions sometimes spin the wrong direction
     status: Todo
